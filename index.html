@@ -9,36 +9,38 @@
 </head>
 
 <body>
-    <h1>How many digits of Pi can you memorize?</h1>
+    <div id="global-container">
+        <h1>How many digits of Pi can you memorize?</h1>
 
-    <div id="input-container">
-        <div id="pi-display-container">
-            <span id="pi-display">3.</span>
-            <input type="text" id="user-input" name="user-input" pattern="[0-9]+" placeholder="Write your decimals..." min="0">
+        <div id="input-container">
+            <div id="pi-display-container">
+                <span id="pi-display">3.</span>
+                <input type="text" id="user-input" name="user-input" pattern="[0-9]+" placeholder="Write your decimals..." min="0">
+            </div>
         </div>
-    </div>
 
-    <div id="virtual-keyboard">
-        <button class="key">1</button>
-        <button class="key">2</button>
-        <button class="key">3</button>
-        <button class="key">4</button>
-        <button class="key">5</button>
-        <button class="key">6</button>
-        <button class="key">7</button>
-        <button class="key">8</button>
-        <button class="key">9</button>
-        <button class="key zero">0</button>
-    </div>
-    
+        <div id="virtual-keyboard">
+            <button class="key">1</button>
+            <button class="key">2</button>
+            <button class="key">3</button>
+            <button class="key">4</button>
+            <button class="key">5</button>
+            <button class="key">6</button>
+            <button class="key">7</button>
+            <button class="key">8</button>
+            <button class="key">9</button>
+            <button class="key zero">0</button>
+        </div>
+        
 
-    <div id="restart-container">
-        <button id="restart-button">Restart</button>
-    </div>
+        <div id="restart-container">
+            <button id="restart-button">Restart</button>
+        </div>
 
-    <div id="message-container">
-        <div id="message"></div>
-        <div id="restart-message"></div>
+        <div id="message-container">
+            <div id="message"></div>
+            <div id="restart-message"></div>
+        </div>
     </div>
 
     <script src="js/script.js"></script>
