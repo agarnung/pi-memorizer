@@ -1,36 +1,130 @@
-#input-container {
-    margin-top: 20px;
+body {
+    background: linear-gradient(-45deg, #bdf0b3, #8cc581, #a0cb99, #a0f290);
+    background-size: 400% 400%;
+    animation: gradient_background 10s ease infinite;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+}
+
+@keyframes gradient_background {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease;
+}
+
+#input-container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    animation: fadeIn 2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#pi-display-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 15px;
 }
 
 #pi-display {
     font-size: 1.5em;
-    margin-right: 10px; 
+    font-weight: bolder;
+    border-color: #5fb87a;
+    color: #d35704;
 }
 
 #user-input {
-    width: 200px;
-    padding: 5px;
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    letter-spacing: 1px;
+    font-size: 1.5em;
+    margin-left: 2.5px;
+    color: #333;
 }
 
 #virtual-keyboard {
-    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+    animation: fadeIn 3s ease;
 }
 
-/* The "." indicates that one is refering to all elements under the "key" class */
 .key {
-    margin: 5px;
+    background: #5fb87a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.key:hover {
+    background: #6ba96b;
+}
+
+.key.zero {
+    grid-column: 2;
+}
+
+#restart-button {
+    margin-top: 20px;
+    background: #ff7373;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    animation: fadeIn 4s ease;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 1em;
     cursor: pointer;
 }
 
+#restart-button:hover {
+    background: #ff4d4d;
+}
 #message {
     color: red;
-    margin-top: 10px;
-}
-
-#restart-message {
-    color: black;
-    margin-top: 10px;
+    margin-top: 20px;
 }

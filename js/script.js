@@ -70,7 +70,7 @@ input.addEventListener('input', () => {
     if (currentDigit !== referenceDigit) {
         // Show error message and set flag to true
         failed = true;
-        message.textContent = `${input.value.length} decimals correct! The ${currentIndex + 1}-th digit is incorrect. Expected: ${referenceDigit}. Restart by entering the first digit...`;
+        message.textContent = `${input.value.length} decimals correct!\n\nThe ${currentIndex + 1}-th digit is incorrect. Expected: ${referenceDigit}.\n\nRestart by entering the first digit...`;
     } else {
         // Clear the error message if the digit is correct
         message.textContent = "";
@@ -101,7 +101,7 @@ keys.forEach((key) => {
 
         // If the clicked digit doesn't match the expected digit in pi, show error
         if (digit !== referenceDigit) {
-            message.textContent = `${input.value.length} decimals correct! The ${currentIndex + 1}-th digit is incorrect. Expected: ${referenceDigit}. Restart by entering the first digit...`;
+            message.textContent = `${input.value.length} decimals correct!\n\nThe ${currentIndex + 1}-th digit is incorrect. Expected: ${referenceDigit}.\n\nRestart by entering the first digit...`;
             failed = true;
         } else {
             // Append the digit to the input if it's correct

@@ -1,37 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title></title>
-        <link rel="stylesheet" href="./css/styles.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi Memorizer</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
 
-    <body>
-        <h1></h1>
-        <div id="pi-display">3.</div>
-        <div id="input-container">
-            <input type="text" id="user-input" name="user-input" pattern= "[0-9]+" placeholder="Write your decimals..." min="0">
-            <div id="virtual-keyboard">
-                <button class="key">1</button>
-                <button class="key">2</button>
-                <button class="key">3</button>
-                <button class="key">4</button>
-                <button class="key">5</button>
-                <button class="key">6</button>
-                <button class="key">7</button>
-                <button class="key">8</button>
-                <button class="key">9</button>
-                <button class="key">0</button>
-            </div>
+<body>
+    <h1>How many digits of Pi can you memorize?</h1>
 
-            <div id="message"></div>
-            <div id="restart-message"></div>
-            <button id="restart-button">Restart</button>
+    <div id="input-container">
+        <div id="pi-display-container">
+            <span id="pi-display">3.</span>
+            <input type="text" id="user-input" name="user-input" pattern="[0-9]+" placeholder="Write your decimals..." min="0">
         </div>
+    </div>
 
-        <script src="js/script.js"></script>
-    </body>
+    <div id="virtual-keyboard">
+        <button class="key">1</button>
+        <button class="key">2</button>
+        <button class="key">3</button>
+        <button class="key">4</button>
+        <button class="key">5</button>
+        <button class="key">6</button>
+        <button class="key">7</button>
+        <button class="key">8</button>
+        <button class="key">9</button>
+        <button class="key zero">0</button>
+    </div>
+    
+
+    <div id="restart-container">
+        <button id="restart-button">Restart</button>
+    </div>
+
+    <div id="message-container">
+        <div id="message"></div>
+        <div id="restart-message"></div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
 
 </html>
