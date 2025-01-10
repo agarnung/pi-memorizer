@@ -1,0 +1,36 @@
+#input-container {
+    margin-top: 20px;
+    align-items: center;
+}
+
+#pi-display {
+    font-size: 1.5em;
+    margin-right: 10px; 
+}
+
+#user-input {
+    width: 200px;
+    padding: 5px;
+}
+
+#virtual-keyboard {
+    margin-top: 10px;
+}
+
+/* The "." indicates that one is refering to all elements under the "key" class */
+.key {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#message {
+    color: red;
+    margin-top: 10px;
+}
+
+#restart-message {
+    color: black;
+    margin-top: 10px;
+}
