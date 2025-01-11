@@ -47,6 +47,33 @@ let failed = false; // Flag to track if an incorrect user input has occurred
 let firstDigit = 0; // To restart automatically when user fails
 let correctDigits = 0;
 
+// Generate random number between -range y +range
+function getRandomValue(range) {
+    return (Math.random() - 0.5) * range * 2; 
+}
+
+// Animation of the pop-up images
+function createKeyframes(name, scale, translateX, translateY, rotation) {
+    const styleSheet = document.styleSheets[0];
+    const keyframes = `
+        @keyframes ${name} {
+            0% {
+                opacity: 0;
+                transform: scale(0) translate(0, 0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(${scale}) translate(${translateX / 2}px, ${translateY / 2}px) rotate(${rotation / 2}deg);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(${scale * 2}) translate(${translateX}px, ${translateY}px) rotate(${rotation}deg);
+            }
+        }
+    `;
+    styleSheet.insertRule(keyframes, styleSheet.cssRules.length); // Inserta la regla en la hoja de estilo
+}
+
 function getRandomImage() {
     const randomIndex = Math.floor(Math.random() * images.length);
     return imagesPath + images[randomIndex];
@@ -57,19 +84,26 @@ function showPopupImage() {
     img.src = getRandomImage();
     img.classList.add('popup-image');
 
-    const randomOffsetX = (Math.random() - 0.5) * 100; 
-    const randomOffsetY = (Math.random() - 0.5) * 100;
+    const randomTranslateX = getRandomValue(50);
+    const randomTranslateY = getRandomValue(50);
+    const randomRotation = getRandomValue(1) * 45; // random rotation from -45 to 45 º
+    const animationName = `popupAnimation-${Date.now()}`; 
 
-    img.style.transform = `translate(calc(-100% + ${randomOffsetX}px), calc(-100% + ${randomOffsetY}px))`;
+    createKeyframes(animationName, 2.5, randomTranslateX, randomTranslateY, randomRotation);
 
-    const popupContainer = document.getElementById('popupimage');
-    popupContainer.appendChild(img);
+    img.style.animation = `${animationName} 5s ease-in-out forwards`;
+
+    const startX = Math.random() * window.innerWidth;
+    const startY = Math.random() * window.innerHeight;
+    img.style.left = `${startX}px`;
+    img.style.top = `${startY}px`;
+
+    popupimage.appendChild(img);
 
     setTimeout(() => {
         img.remove();
-    }, 2000);
+    }, 4000);
 }
-
 
 // Restrict writing and cursor movement
 input.addEventListener('keydown', (event) => {
