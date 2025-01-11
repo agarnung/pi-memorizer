@@ -155,6 +155,28 @@ h1 {
     grid-column: 2;
 }
 
+#score-container {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    font-size: 1.7em;
+    width: auto;
+    height: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+#score {
+    font-weight: bold;
+}
+
 #restart-button {
     background: linear-gradient(to bottom, rgb(240, 131, 131), #f66363); 
     color: white;
@@ -186,22 +208,27 @@ h1 {
 #message {
     position: absolute;
     color: white;
+    white-space: pre-wrap; /* To allow line jumps when setting text from JavaScript */
     background: linear-gradient(to bottom, #ef6a6a, #e53737);
     padding: 15px;
     border-radius: 12px;
     font-size: 1.5em;
-    margin-top: 20px;
+    margin-top: -300px;
+    margin-bottom: 20px;
     text-align: center;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     animation: blink 1.5s ease-in-out infinite, popUp 0.5s ease-out;
+    display: none;
+    opacity: 0.85; 
+    pointer-events: none; /* Allow clicking other elements behind him */
 }
 
 @keyframes blink {
     0%, 100% {
-        opacity: 1;
+        opacity: 0.85; 
     }
     50% {
-        opacity: 0.6;
+        opacity: 0.3;
     }
 }
 
@@ -212,20 +239,19 @@ h1 {
     }
     to {
         transform: translateY(0);
-        opacity: 1;
+        opacity: 0.35; 
     }
 }
 
 #restart-message {
     position: absolute;
     color: black;
-    margin-top: 20px;
+    margin-top: 10px;
     text-align: center;
     font-size: 1.5em;
 }
 
 #message-container {
-    margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;

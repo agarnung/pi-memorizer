@@ -5,9 +5,11 @@ const keys = document.querySelectorAll('.key');
 const message = document.getElementById('message');
 const restart_message = document.getElementById('restart-message');
 const restartButton = document.getElementById('restart-button');
+const scoreBox = document.getElementById('score');
 
-let failed = false;  // Flag to track if an error has occurred
+let failed = false; // Flag to track if an error has occurred
 let firstDigit = 0; // To restart automatically when user fails
+let correctDigits = 0;
 
 // Restrict writing and cursor movement
 input.addEventListener('keydown', (event) => {
@@ -68,12 +70,14 @@ input.addEventListener('input', () => {
     const referenceDigit = a_few_of_pi[currentIndex];
 
     if (currentDigit !== referenceDigit) {
-        // Show error message and set flag to true
         failed = true;
-        message.textContent = `${input.value.length} decimals correct!\n\nThe ${currentIndex + 1}-th digit is incorrect. Expected: ${referenceDigit}.\n\nRestart by entering the first digit...`;
+        message.textContent = `The ${currentIndex + 1}-th digit is incorrect. Expected: ${referenceDigit}.\n\nRestart by entering the first digit...`;
+        message.style.display = "block";
     } else {
-        // Clear the error message if the digit is correct
         message.textContent = "";
+        message.style.display = "none";
+        correctDigits = currentIndex + 1;
+        scoreBox.textContent = "π-streak: " + correctDigits
     }
 });
 
@@ -99,15 +103,18 @@ keys.forEach((key) => {
 
         const referenceDigit = a_few_of_pi[currentIndex];
 
-        // If the clicked digit doesn't match the expected digit in pi, show error
         if (digit !== referenceDigit) {
-            message.textContent = `${input.value.length} decimals correct!\n\nThe ${currentIndex + 1}-th digit is incorrect. Expected: ${referenceDigit}.\n\nRestart by entering the first digit...`;
+            message.textContent = `The ${currentIndex + 1}-th digit is incorrect. Expected: ${referenceDigit}.\n\nRestart by entering the first digit...`;
             failed = true;
+            message.style.display = "block";
         } else {
-            // Append the digit to the input if it's correct
-            input.value += digit;
-            message.textContent = ""; // Clear the error message if it's correct
+            message.textContent = "";
+            message.style.display = "none";
+            correctDigits = currentIndex + 1;
+            scoreBox.textContent = "π-streak: " + correctDigits
         }
+
+        input.value += digit;
 
         // Move cursor to the end
         input.focus();
@@ -124,7 +131,9 @@ window.onload = () => {
 // Restart function
 function restart() {
     input.value = ''; 
+    message.style.display = "none";
     restart_message.textContent = "Restarting..."; 
+    scoreBox.textContent = "π-streak: " + 0
 
     setTimeout(() => {
         // After clearing the input, set it back to the first correct digit
@@ -141,7 +150,9 @@ function restart() {
 // Add event listener to the restart button to reset the game
 restartButton.addEventListener('click', () => {
     input.value = ''; 
+    message.style.display = "none";
     restart_message.textContent = "Restarting..."; 
+    scoreBox.textContent = "π-streak: " + 0
 
     setTimeout(() => {
         restart_message.textContent = '';
