@@ -146,7 +146,7 @@ restartButton.addEventListener('click', () => {
     setTimeout(() => {
         restart_message.textContent = '';
         message.textContent = '';
-    }, 1); 
+    }, 200); 
 
 });
 

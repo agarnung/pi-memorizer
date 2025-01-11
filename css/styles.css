@@ -12,6 +12,24 @@ body {
     color: #333;
 }
 
+#global-container {
+    background: linear-gradient(45deg, #b5c6b2, #c9dfc6, #e4ede2, #ffffff);
+    background-size: 400% 400%;
+    animation: gradient_background 100s ease infinite;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(2, 43, 247, 0.2), 0 5px 10px rgba(0, 0, 0, 0.1);
+    border: 2px dashed rgba(1, 36, 8, 0.5); 
+    max-width: 900px; 
+    width: 90%;
+    text-align: center; 
+}
+
 @keyframes gradient_background {
     0% {
         background-position: 0% 50%;
@@ -24,14 +42,25 @@ body {
     }
 }
 
-#global-container {
-    background: white;
-}
-
 h1 {
-    font-size: 2em;
+    font-family: 'Roboto', sans-serif;
+    color: rgb(37, 22, 7);
+    font-size: 2.5em; 
     margin-bottom: 20px;
-    animation: fadeIn 1s ease;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center; 
+    text-shadow: 
+        10px 5px 4px rgba(0, 0, 0, 0.3),
+        0 4px 8px rgba(0, 0, 0, 0.2);  
+
+    /* Consult to check it compatible navigator */
+    @supports (-webkit-background-clip: text) and (-webkit-text-fill-color: transparent) {
+        background: linear-gradient(to right, #112417, #0e2203);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 10px 5px 4px rgba(0, 0, 0, 0.2);
+    }
 }
 
 #input-container {
@@ -40,7 +69,7 @@ h1 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     padding: 20px;
     width: 90%;
-    max-width: 400px;
+    max-width: 100%;
     text-align: center;
     animation: fadeIn 2s ease;
     display: flex;
@@ -95,18 +124,31 @@ h1 {
 }
 
 .key {
-    background: #5fb87a;
+    background: linear-gradient(to bottom, #5fb87a, #59ad5f); 
     color: white;
     border: none;
-    border-radius: 5px;
-    padding: 15px;
-    font-size: 1.2em;
+    border-radius: 10px;
+    width: 70px;
+    height: 70px; 
+    font-size: 1.75em;
     cursor: pointer;
-    transition: background 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px #3a6d46, 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.01s ease, box-shadow 0.01s ease;
 }
 
 .key:hover {
-    background: #6ba96b;
+    background: linear-gradient(to bottom, #76c58f, #529a6d); 
+    box-shadow: 0 8px #2f5537, 0 6px 15px rgba(0, 0, 0, 0.3); 
+    transform: translateY(-2px); 
+}
+
+.key:active {
+    background: linear-gradient(to bottom, #468259, #5e9e71); 
+    box-shadow: 0 4px #2f5537;
+    transform: translateY(2px);
 }
 
 .key.zero {
@@ -114,21 +156,78 @@ h1 {
 }
 
 #restart-button {
-    margin-top: 20px;
-    background: #ff7373;
+    background: linear-gradient(to bottom, rgb(240, 131, 131), #f66363); 
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     animation: fadeIn 4s ease;
-    padding: 10px 20px;
-    font-size: 1em;
+    padding: 12px 24px;
+    font-size: 1.2em;
     cursor: pointer;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px #c43c3c, 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
 }
 
 #restart-button:hover {
-    background: #ff4d4d;
+    background: linear-gradient(to bottom, rgb(241, 139, 139), #e96d6d);
+    box-shadow: 0 8px #c43c3c, 0 6px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
 }
+
+#restart-button:active {
+    background: linear-gradient(to bottom, rgb(203, 115, 115), #cd5a5a);
+    box-shadow: 0 4px #812828, 0 2px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(2px);
+}
+
 #message {
-    color: red;
+    position: absolute;
+    color: white;
+    background: linear-gradient(to bottom, #ef6a6a, #e53737);
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 1.5em;
     margin-top: 20px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    animation: blink 1.5s ease-in-out infinite, popUp 0.5s ease-out;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+@keyframes popUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#restart-message {
+    position: absolute;
+    color: black;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+#message-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
