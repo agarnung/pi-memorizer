@@ -8,56 +8,68 @@ const restartButton = document.getElementById('restart-button');
 const scoreBox = document.getElementById('score');
 const popupImage = document.getElementById('popupimage');
 
-// const popUsImageInterval = 5;
-// const imagesPath = './assets/pis/;'
+const popUsImageInterval = 5;
+const imagesPath = './assets/pis/';
+const images = [
+    'pi_archimedes.svg',
+    'pi_Beta.svg',
+    'pi_Cauchy_distrib.svg',
+    'pi_circle.svg',
+    'pi_cosmo_cte.svg',
+    'pi_Coulomb.svg',
+    'pi_Dirichlet_integral.svg',
+    'pi_ellipse.svg',
+    'pi_Euler.svg',
+    'pi_exact_pendulum.svg',
+    'pi_Fibonacci.svg',
+    'pi_fraction.svg',
+    'pi_Gaussian_integral.svg',
+    'pi_heisenberg.svg',
+    'pi_iterative.svg',
+    'pi_Kepler3rd.svg',
+    'pi_Leibniz.svg',
+    'pi_muo.svg',
+    'pi_Newton.svg',
+    'pi_pendulum.svg',
+    'pi_Ramanujan_class_invariants.svg',
+    'pi_Ramanujan_lemniscate_cte.svg',
+    'pi_ramanujan.svg',
+    'pi_Rieman_unit_circle.svg',
+    'pi_sphere.svg',
+    'pi_sum2.svg',
+    'pi_sum3.svg',
+    'pi_sum.svg',
+    'pi_Wallis.svg',
+    'pi_Zeta.svg'
+];
 
-let failed = false; // Flag to track if an error has occurred
+let failed = false; // Flag to track if an incorrect user input has occurred
 let firstDigit = 0; // To restart automatically when user fails
 let correctDigits = 0;
 
-// const fs = require('fs');
-// const path = require('path');
+function getRandomImage() {
+    const randomIndex = Math.floor(Math.random() * images.length);
+    return imagesPath + images[randomIndex];
+}
 
-// function getImagesFromDirectory() {
-//     const directoryPath = path.join(__dirname, imagesPath);
-//     const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.svg'];
+function showPopupImage() {
+    const img = document.createElement('img');
+    img.src = getRandomImage();
+    img.classList.add('popup-image');
 
-//     const images = fs.readdirSync(directoryPath)
-//         .filter(file => imageExtensions.includes(path.extname(file).toLowerCase()))
-//         .map(file => path.join(directoryPath, file));
+    const randomOffsetX = (Math.random() - 0.5) * 100; 
+    const randomOffsetY = (Math.random() - 0.5) * 100;
 
-//     return images;
-// }
+    img.style.transform = `translate(calc(-100% + ${randomOffsetX}px), calc(-100% + ${randomOffsetY}px))`;
 
-// const _images = getImagesFromDirectory();
+    const popupContainer = document.getElementById('popupimage');
+    popupContainer.appendChild(img);
 
-// function getRandomImage() {
-//     const randomIndex = Math.floor(Math.random() * _images.length);
-//     return imagesPath + _images[randomIndex]; 
-// }
+    setTimeout(() => {
+        img.remove();
+    }, 2000);
+}
 
-// function showPopupImage() {
-//     const img = document.createElement('img');
-//     img.src = getRandomImage();
-//     img.classList.add('popup-image');
-
-//     // Set random positions for the image
-//     const randomX = Math.random() * window.innerWidth;
-//     const randomY = Math.random() * window.innerHeight;
-
-//     img.style.left = `${randomX}px`;
-//     img.style.top = `${randomY}px`;
-
-//     const popupContainer = document.getElementById('popupimage');
-//     popupContainer.appendChild(img);
-//     img.style.display = 'block';
-
-//     // Remove the image after 1 second
-//     setTimeout(() => {
-//         img.style.display = 'none';
-//         img.remove();
-//     }, 1000);
-// }
 
 // Restrict writing and cursor movement
 input.addEventListener('keydown', (event) => {
@@ -126,9 +138,9 @@ input.addEventListener('input', () => {
         message.style.display = "none";
         correctDigits = currentIndex + 1;
         scoreBox.textContent = "π-streak: " + correctDigits
-        // if (decimalCount % popUsImageInterval === 0) {
-        //     showPopupImage();
-        // }
+        if (correctDigits >0 && correctDigits % popUsImageInterval === 0) {
+            showPopupImage();
+        }
     }
 });
 
@@ -163,9 +175,9 @@ keys.forEach((key) => {
             message.style.display = "none";
             correctDigits = currentIndex + 1;
             scoreBox.textContent = "π-streak: " + correctDigits
-            // if (decimalCount % popUsImageInterval === 0) {
-            //     showPopupImage();
-            // }
+            if (correctDigits >0 && correctDigits % popUsImageInterval === 0) {
+                showPopupImage();
+            }
         }
 
         input.value += digit;

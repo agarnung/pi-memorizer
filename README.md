@@ -10,8 +10,7 @@ _My record is 150 digits 🤨... CAN you break it :shipit:_?
 ---
 
 ## TODO
-- Improve CSS for this version
-- Pop-up of formalas with zoom-in and fade effect
+- Dynamically read images in assets
 - Save progress without using a database (from the server side) for this version
 - Flas/React/Node.js... version
 - Android version with Flutter...
