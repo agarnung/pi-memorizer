@@ -6,10 +6,58 @@ const message = document.getElementById('message');
 const restart_message = document.getElementById('restart-message');
 const restartButton = document.getElementById('restart-button');
 const scoreBox = document.getElementById('score');
+const popupImage = document.getElementById('popupimage');
+
+// const popUsImageInterval = 5;
+// const imagesPath = './assets/pis/;'
 
 let failed = false; // Flag to track if an error has occurred
 let firstDigit = 0; // To restart automatically when user fails
 let correctDigits = 0;
+
+// const fs = require('fs');
+// const path = require('path');
+
+// function getImagesFromDirectory() {
+//     const directoryPath = path.join(__dirname, imagesPath);
+//     const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.svg'];
+
+//     const images = fs.readdirSync(directoryPath)
+//         .filter(file => imageExtensions.includes(path.extname(file).toLowerCase()))
+//         .map(file => path.join(directoryPath, file));
+
+//     return images;
+// }
+
+// const _images = getImagesFromDirectory();
+
+// function getRandomImage() {
+//     const randomIndex = Math.floor(Math.random() * _images.length);
+//     return imagesPath + _images[randomIndex]; 
+// }
+
+// function showPopupImage() {
+//     const img = document.createElement('img');
+//     img.src = getRandomImage();
+//     img.classList.add('popup-image');
+
+//     // Set random positions for the image
+//     const randomX = Math.random() * window.innerWidth;
+//     const randomY = Math.random() * window.innerHeight;
+
+//     img.style.left = `${randomX}px`;
+//     img.style.top = `${randomY}px`;
+
+//     const popupContainer = document.getElementById('popupimage');
+//     popupContainer.appendChild(img);
+//     img.style.display = 'block';
+
+//     // Remove the image after 1 second
+//     setTimeout(() => {
+//         img.style.display = 'none';
+//         img.remove();
+//     }, 1000);
+// }
 
 // Restrict writing and cursor movement
 input.addEventListener('keydown', (event) => {
@@ -78,6 +126,9 @@ input.addEventListener('input', () => {
         message.style.display = "none";
         correctDigits = currentIndex + 1;
         scoreBox.textContent = "π-streak: " + correctDigits
+        // if (decimalCount % popUsImageInterval === 0) {
+        //     showPopupImage();
+        // }
     }
 });
 
@@ -112,6 +163,9 @@ keys.forEach((key) => {
             message.style.display = "none";
             correctDigits = currentIndex + 1;
             scoreBox.textContent = "π-streak: " + correctDigits
+            // if (decimalCount % popUsImageInterval === 0) {
+            //     showPopupImage();
+            // }
         }
 
         input.value += digit;
