@@ -171,8 +171,8 @@ input.addEventListener('input', () => {
         message.textContent = "";
         message.style.display = "none";
         correctDigits = currentIndex + 1;
-        scoreBox.textContent = "π-streak: " + correctDigits
-        if (correctDigits >0 && correctDigits % popUsImageInterval === 0) {
+        scoreBox.textContent = "π-streak: " + correctDigits;
+        if (correctDigits > 0 && correctDigits % popUsImageInterval === 0) {
             showPopupImage();
         }
     }
@@ -188,7 +188,7 @@ keys.forEach((key) => {
         if (failed)
         {
             failed = false; 
-            firstDigit = digit
+            firstDigit = digit;
             restart();
         }
 
@@ -201,15 +201,15 @@ keys.forEach((key) => {
         const referenceDigit = a_few_of_pi[currentIndex];
 
         if (digit !== referenceDigit) {
-            message.textContent = `The ${currentIndex + 1}-th digit is incorrect. Expected: ${referenceDigit}.\n\nRestart by entering the first digit...`;
             failed = true;
+            message.textContent = `The ${currentIndex + 1}-th digit is incorrect. Expected: ${referenceDigit}.\n\nRestart by entering the first digit...`;
             message.style.display = "block";
         } else {
             message.textContent = "";
             message.style.display = "none";
             correctDigits = currentIndex + 1;
-            scoreBox.textContent = "π-streak: " + correctDigits
-            if (correctDigits >0 && correctDigits % popUsImageInterval === 0) {
+            scoreBox.textContent = "π-streak: " + correctDigits;
+            if (correctDigits > 0 && correctDigits % popUsImageInterval === 0) {
                 showPopupImage();
             }
         }
@@ -233,7 +233,7 @@ function restart() {
     input.value = ''; 
     message.style.display = "none";
     restart_message.textContent = "Restarting..."; 
-    scoreBox.textContent = "π-streak: " + 0
+    scoreBox.textContent = "π-streak: " + 0;
 
     setTimeout(() => {
         // After clearing the input, set it back to the first correct digit
@@ -252,7 +252,7 @@ restartButton.addEventListener('click', () => {
     input.value = ''; 
     message.style.display = "none";
     restart_message.textContent = "Restarting..."; 
-    scoreBox.textContent = "π-streak: " + 0
+    scoreBox.textContent = "π-streak: " + 0;
 
     setTimeout(() => {
         restart_message.textContent = '';
