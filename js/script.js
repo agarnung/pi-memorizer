@@ -44,7 +44,6 @@ const images = [
 ];
 
 let failed = false; // Flag to track if an incorrect user input has occurred
-let firstDigit = 0; // To restart automatically when user fails
 let correctDigits = 0;
 
 // Generate random number between -range y +range
@@ -71,7 +70,7 @@ function createKeyframes(name, scale, translateX, translateY, rotation) {
             }
         }
     `;
-    styleSheet.insertRule(keyframes, styleSheet.cssRules.length); // Inserta la regla en la hoja de estilo
+    styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
 }
 
 function getRandomImage() {
@@ -105,6 +104,11 @@ function showPopupImage() {
     }, 4000);
 }
 
+// Prevent copy, paste, and cut
+input.addEventListener('copy', (event) => { event.preventDefault(); });
+input.addEventListener('paste', (event) => { event.preventDefault(); });
+input.addEventListener('cut', (event) => { event.preventDefault(); });
+
 // Restrict writing and cursor movement
 input.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowLeft' || event.key === 'ArrowRight' ||
@@ -116,15 +120,40 @@ input.addEventListener('keydown', (event) => {
 
     // Prevent input if cursor is not at the end
     const cursorAtEnd = input.selectionStart === input.value.length;
-    if (!cursorAtEnd) {
+    if (!cursorAtEnd || failed) {
         event.preventDefault();
     }
 });
 
-// Prevent copy, paste, and cut
-input.addEventListener('copy', (event) => { event.preventDefault(); });
-input.addEventListener('paste', (event) => { event.preventDefault(); });
-input.addEventListener('cut', (event) => { event.preventDefault(); });
+// Restart function
+function restart() {
+    input.value = ''; 
+    message.style.display = "none";
+    restart_message.textContent = "Restarting..."; 
+    scoreBox.textContent = "π-streak: " + 0;
+
+    setTimeout(() => {
+        restart_message.textContent = '';
+        message.textContent = '';
+        failed = false;
+    }, 200); 
+}
+
+// Listen for "R" key press to restart
+document.addEventListener('keydown', (event) => {
+    if (event.key.toLowerCase() === 'r') {
+        restart(); 
+    }
+})
+
+// Add event listener to the restart button to reset the game
+restartButton.addEventListener('click', () => {
+    restart();
+    
+    // Move cursor to the end
+    input.focus();
+    input.selectionStart = input.selectionEnd = input.value.length;
+});
 
 // Force cursor to the end if user clicks in the middle
 input.addEventListener('click', () => {
@@ -137,39 +166,30 @@ input.addEventListener('click', () => {
 input.addEventListener('input', () => {
     input.value = input.value.replace(/[^0-9]/g, ''); // Remove invalid characters
     input.selectionStart = input.selectionEnd = input.value.length; // Force cursor to the end
-
-    if (failed)
-    {
-        failed = false; 
-        firstDigit = input.value[input.value.length - 1]
-        restart();
-    }
 });
 
-// Check for input against pi sequence
+// Input validation and game logic
 input.addEventListener('input', () => {
-    const userValue = input.value;
+    if (failed) return; // Prevent further inputs if failed
 
-    // Get the current digit entered
+    const userValue = input.value;
     const currentIndex = userValue.length - 1;
 
     if (currentIndex >= a_few_of_pi.length) {
-        // Prevent input if it exceeds the length of the reference string
         message.textContent = "Input exceeds the reference length.";
         input.value = userValue.slice(0, a_few_of_pi.length);
         print("You won, I'm leaving...")
         window.close();
         return;
     }
-
     const currentDigit = userValue[currentIndex];
     const referenceDigit = a_few_of_pi[currentIndex];
 
     if (currentDigit !== referenceDigit) {
         failed = true;
-        message.textContent = `The ${currentIndex + 1}-th digit is incorrect. Expected: ${referenceDigit}.\n\nRestart by entering the first digit...`;
+        message.textContent = `The ${currentIndex + 1}-th digit is incorrect. Expected: ${referenceDigit}.\n\nPress Enter or Restart to try again.`;
         message.style.display = "block";
-        correctDigits = currentIndex = 0;
+        correctDigits = 0;
     } else {
         message.textContent = "";
         message.style.display = "none";
@@ -181,61 +201,39 @@ input.addEventListener('input', () => {
     }
 });
 
-// Handle virtual keyboard buttons
+// Input validation and game logic
 keys.forEach((key) => {
     key.addEventListener('click', () => {
+        if (failed) return; // Prevent further inputs if failed
+
         const digit = key.textContent;
         const userValue = input.value;
         const currentIndex = userValue.length;
 
-        if (failed)
-        {
-            failed = false; 
-            firstDigit = digit;
-            restart();
-        }
-
-        // Check if input exceeds the length of pi
         if (currentIndex >= a_few_of_pi.length) {
             message.textContent = "Input exceeds the reference length.";
+            input.value = userValue.slice(0, a_few_of_pi.length);
             print("You won, I'm leaving...")
             window.close();
             return;
         }
 
         const referenceDigit = a_few_of_pi[currentIndex];
-
         if (digit !== referenceDigit) {
             failed = true;
-            message.textContent = `The ${currentIndex + 1}-th digit is incorrect. Expected: ${referenceDigit}.\n\nRestart by entering the first digit...`;
+            message.textContent = `The ${currentIndex + 1}-th digit is incorrect. Expected: ${referenceDigit}.\n\nPress Restart to try again.`;
             message.style.display = "block";
-            correctDigits = currentIndex = 0;
-
-            if (currentIndex === 0)
-            {
-                // badWasFirst = true;
-
-                // input.value += digit;
-
-                // firstDigit = digit;
-
-                // // Move cursor to the end
-                // input.focus();
-                // input.selectionStart = input.selectionEnd = input.value.length;
-
-                // return
-            }
+            correctDigits = 0;
         } else {
             message.textContent = "";
-            message.style.display = "none";
             correctDigits = currentIndex + 1;
             scoreBox.textContent = "π-streak: " + correctDigits;
+            input.value += digit;
+
             if (correctDigits > 0 && correctDigits % popUsImageInterval === 0) {
                 showPopupImage();
             }
         }
-
-        input.value += digit;
 
         // Move cursor to the end
         input.focus();
@@ -243,50 +241,7 @@ keys.forEach((key) => {
     });
 });
 
-// Focus the input and move cursor to the end on page load
+// On load, focus the input but prevent editing with the keyboard
 window.onload = () => {
     input.focus();
-    input.selectionStart = input.selectionEnd = input.value.length;
 };
-
-// Restart function
-function restart() {
-    input.value = ''; 
-    message.style.display = "none";
-    restart_message.textContent = "Restarting..."; 
-    scoreBox.textContent = "π-streak: " + 0;
-
-    setTimeout(() => {
-        // After clearing the input, set it back to the first correct digit
-        input.value = firstDigit;
-
-        // Dispatch an input event to re-trigger the validation
-        input.dispatchEvent(new Event('input'));
-
-        restart_message.textContent = '';
-        message.textContent = '';
-    }, 1); 
-}
-
-// Add event listener to the restart button to reset the game
-restartButton.addEventListener('click', () => {
-    input.value = ''; 
-    message.style.display = "none";
-    restart_message.textContent = "Restarting..."; 
-    scoreBox.textContent = "π-streak: " + 0;
-
-    setTimeout(() => {
-        restart_message.textContent = '';
-        message.textContent = '';
-    }, 200); 
-
-});
-
-// Force cursor to the end if user clicks in the middle
-restartButton.addEventListener('click', () => {
-    setTimeout(() => {
-        // Move cursor to the end
-        input.focus();
-        input.selectionStart = input.selectionEnd = input.value.length;
-    }, 0);
-});
