@@ -169,6 +169,7 @@ input.addEventListener('input', () => {
         failed = true;
         message.textContent = `The ${currentIndex + 1}-th digit is incorrect. Expected: ${referenceDigit}.\n\nRestart by entering the first digit...`;
         message.style.display = "block";
+        correctDigits = currentIndex = 0;
     } else {
         message.textContent = "";
         message.style.display = "none";
@@ -208,6 +209,7 @@ keys.forEach((key) => {
             failed = true;
             message.textContent = `The ${currentIndex + 1}-th digit is incorrect. Expected: ${referenceDigit}.\n\nRestart by entering the first digit...`;
             message.style.display = "block";
+            correctDigits = currentIndex = 0;
 
             if (currentIndex === 0)
             {
