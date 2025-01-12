@@ -25,8 +25,8 @@ body {
     border-radius: 20px;
     box-shadow: 0 10px 25px rgba(2, 43, 247, 0.2), 0 5px 10px rgba(0, 0, 0, 0.1);
     border: 2px dashed rgba(1, 36, 8, 0.5); 
-    max-width: 900px; 
-    width: 90%;
+    width: 900px;
+    height: 625px;
     text-align: center; 
 }
 
@@ -160,7 +160,7 @@ h1 {
     bottom: 20px;
     background-color: rgba(0, 0, 0, 0.3);
     color: white;
-    font-size: 1.7em;
+    font-size: 1.8em;
     width: auto;
     height: 40px;
     padding-left: 10px;
@@ -275,5 +275,4 @@ h1 {
     width: 150px;
     height: 150px;
     object-fit: contain;
-    transform: translate(-500%, -500%);
 }

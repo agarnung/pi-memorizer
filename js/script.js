@@ -90,14 +90,14 @@ function showPopupImage() {
 
     createKeyframes(animationName, 2.5, randomTranslateX, randomTranslateY, randomRotation);
 
-    img.style.animation = `${animationName} 5s ease-in-out forwards`;
+    img.style.animation = `${animationName} 2s ease-in-out forwards`;
 
     const startX = Math.random() * window.innerWidth;
     const startY = Math.random() * window.innerHeight;
     img.style.left = `${startX}px`;
     img.style.top = `${startY}px`;
 
-    popupimage.appendChild(img);
+    popupImage.appendChild(img);
 
     setTimeout(() => {
         img.remove();
@@ -139,9 +139,9 @@ function restart() {
     }, 200); 
 }
 
-// Listen for "R" key press to restart
+// Keys to restart
 document.addEventListener('keydown', (event) => {
-    if (event.key.toLowerCase() === 'r') {
+    if (event.key.toLowerCase() === 'r' || (event.key === 'Enter' && failed)) {
         restart(); 
     }
 })
