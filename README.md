@@ -13,6 +13,7 @@ _My record is 150 digits 🤨... CAN you break it :shipit:_?
 
 ## TODO
 - Dynamically read images in assets
+- Allow for different virtual keyboard setups
 - Save progress without using a database (from the server side) for this version
 - Flas/React/Node.js... version
 - Android version with Flutter...
