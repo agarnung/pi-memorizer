@@ -1,7 +1,7 @@
 # pi-memorizer
 A game to memorize arbitrary digits of π.
 
-[Play it here!!](https://agarnung.github.io/pi-memorizer/).
+[Play it here!!](https://agarnung.github.io/pi-memorizer/)
 
 _A work in progress._
 
