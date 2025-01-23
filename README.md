@@ -1,4 +1,9 @@
 # pi-memorizer
+
+<p align="center">
+  <img src="./assets/pi.png" alt="pi" title="pi" />
+</p>
+
 A game to memorize arbitrary digits of π.
 
 [Play it here!!](https://agarnung.github.io/pi-memorizer/)
